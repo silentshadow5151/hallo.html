@@ -1,0 +1,459 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DX SHUVO VOICE KING</title>
+  <link rel="stylesheet" href="popup.css">
+</head><body>  <div class="app-container"><!-- HEADER -->
+<header class="header">
+
+  <div class="brand">
+    <div class="brand-logo">DX</div>
+
+    <div class="brand-text">
+      <h1>SHUVO</h1>
+      <span>VOICE KING</span>
+    </div>
+  </div>
+
+  <div class="online-status">
+    <i></i>
+    LIVE
+  </div>
+
+</header>
+
+
+<!-- CONTROL PANEL -->
+<section class="control-panel">
+
+  <div class="panel-title">
+    <span>VOICE CONTROL</span>
+    <small>PRO</small>
+  </div>
+
+
+  <!-- FEEDBACK -->
+  <div class="slider-row">
+
+    <div class="slider-info">
+      <span>Feedback</span>
+      <b id="feedbackVal">0.00</b>
+    </div>
+
+    <input
+      type="range"
+      id="feedback"
+      min="0"
+      max="1"
+      step="0.01"
+      value="0.00"
+    >
+
+  </div>
+
+
+  <!-- DELAY -->
+  <div class="slider-row">
+
+    <div class="slider-info">
+      <span>Delay</span>
+      <b id="delayVal">0.00</b>
+    </div>
+
+    <input
+      type="range"
+      id="delay"
+      min="0"
+      max="1"
+      step="0.01"
+      value="0.00"
+    >
+
+  </div>
+
+
+  <!-- TOGGLES -->
+  <div class="toggle-area">
+
+    <div class="toggle-item">
+      <span>MIC</span>
+      <button
+        class="circle-btn"
+        id="micToggle"
+        type="button"
+        aria-label="Microphone toggle">
+      </button>
+    </div>
+
+    <div class="toggle-item">
+      <span>IPXB</span>
+      <button
+        class="circle-btn"
+        id="ipxbToggle"
+        type="button"
+        aria-label="IPXB toggle">
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- VOLUME CONTROL -->
+<section class="volume-panel">
+
+  <div class="volume-header">
+
+    <div class="volume-label">
+      <span class="volume-icon">🔊</span>
+      <span>VOLUME</span>
+    </div>
+
+    <strong id="volText">60%</strong>
+
+  </div>
+
+
+  <div class="volume-controls">
+
+    <button
+      id="volumeDown"
+      class="volume-btn"
+      type="button"
+      aria-label="Decrease volume">
+      −
+    </button>
+
+
+    <div class="volume-meter">
+
+      <div class="volume-track">
+        <div
+          id="volumeFill"
+          class="volume-fill"
+          style="width: 60%;">
+        </div>
+      </div>
+
+      <input
+        type="range"
+        id="volume"
+        min="0"
+        max="100"
+        value="60"
+        aria-label="Volume">
+
+    </div>
+
+
+    <button
+      id="volumeUp"
+      class="volume-btn"
+      type="button"
+      aria-label="Increase volume">
+      +
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- STATUS -->
+<section class="status-bar">
+
+  <div class="status-box">
+
+    <span class="status-dot"></span>
+
+    <div>
+      <small>OUTPUT</small>
+      <b id="dbText">0 dB</b>
+    </div>
+
+  </div>
+
+
+  <div class="status-box">
+
+    <span class="wave-symbol">〽</span>
+
+    <div>
+      <small>VOICE</small>
+      <b>READY</b>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MICROPHONE AREA -->
+<main class="mic-section">
+
+  <div class="grid-overlay"></div>
+
+  <div class="mic-title">
+    <span>DX SHUVO</span>
+    <strong>VOICE KING</strong>
+  </div>
+
+
+  <div class="mic-container">
+
+    <svg
+      class="mic-svg"
+      viewBox="0 0 200 450"
+      xmlns="http://www.w3.org/2000/svg">
+
+      <defs>
+
+        <!-- MICROPHONE BODY -->
+        <radialGradient
+          id="meshGrad"
+          cx="40%"
+          cy="30%"
+          r="70%">
+
+          <stop
+            offset="0%"
+            stop-color="#777"/>
+
+          <stop
+            offset="45%"
+            stop-color="#222"/>
+
+          <stop
+            offset="100%"
+            stop-color="#030303"/>
+
+        </radialGradient>
+
+
+        <!-- METAL RING -->
+        <linearGradient
+          id="ringGrad"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%">
+
+          <stop
+            offset="0%"
+            stop-color="#555"/>
+
+          <stop
+            offset="45%"
+            stop-color="#fff"/>
+
+          <stop
+            offset="70%"
+            stop-color="#aaa"/>
+
+          <stop
+            offset="100%"
+            stop-color="#333"/>
+
+        </linearGradient>
+
+
+        <!-- HANDLE -->
+        <linearGradient
+          id="handleGrad"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%">
+
+          <stop
+            offset="0%"
+            stop-color="#111"/>
+
+          <stop
+            offset="35%"
+            stop-color="#555"/>
+
+          <stop
+            offset="55%"
+            stop-color="#222"/>
+
+          <stop
+            offset="100%"
+            stop-color="#050505"/>
+
+        </linearGradient>
+
+
+        <!-- GRID -->
+        <pattern
+          id="gridPattern"
+          width="4"
+          height="4"
+          patternUnits="userSpaceOnUse">
+
+          <path
+            d="M 0 2 L 4 2 M 2 0 L 2 4"
+            stroke="#333"
+            stroke-width="0.6"/>
+
+        </pattern>
+
+
+        <!-- RED GLOW -->
+        <filter id="redGlow">
+
+          <feGaussianBlur
+            stdDeviation="4"
+            result="blur"/>
+
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+
+        </filter>
+
+
+        <!-- GREEN GLOW -->
+        <filter id="greenGlow">
+
+          <feGaussianBlur
+            stdDeviation="4"
+            result="blur"/>
+
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+
+        </filter>
+
+      </defs>
+
+
+      <!-- MICROPHONE HEAD -->
+
+      <ellipse
+        cx="100"
+        cy="90"
+        rx="75"
+        ry="75"
+        fill="url(#meshGrad)"/>
+
+      <ellipse
+        cx="100"
+        cy="90"
+        rx="75"
+        ry="75"
+        fill="url(#gridPattern)"
+        opacity="0.8"/>
+
+
+      <!-- METAL RING -->
+
+      <rect
+        x="20"
+        y="84"
+        width="160"
+        height="14"
+        rx="7"
+        fill="url(#ringGrad)"/>
+
+
+      <!-- NEON RING -->
+
+      <rect
+        class="ring-glow"
+        x="25"
+        y="87"
+        width="150"
+        height="8"
+        rx="4"
+        fill="#ff0000"
+        filter="url(#redGlow)"/>
+
+
+      <!-- NECK -->
+
+      <path
+        d="M50 145 L60 160 L140 160 L150 145 Z"
+        fill="url(#ringGrad)"/>
+
+
+      <!-- HANDLE -->
+
+      <path
+        d="M60 160 L70 410 L130 410 L140 160 Z"
+        fill="url(#handleGrad)"/>
+
+
+      <!-- BASE -->
+
+      <path
+        d="M70 410 L75 440 L125 440 L130 410 Z"
+        fill="url(#ringGrad)"/>
+
+
+      <!-- SWITCH -->
+
+      <rect
+        x="85"
+        y="240"
+        width="30"
+        height="55"
+        rx="15"
+        fill="#050505"
+        stroke="#444"
+        stroke-width="2"/>
+
+
+      <text
+        id="switchText"
+        x="100"
+        y="258"
+        text-anchor="middle"
+        fill="#fff"
+        font-size="11"
+        font-weight="bold">
+        OFF
+      </text>
+
+
+      <circle
+        id="switchKnob"
+        class="btn-off"
+        cx="100"
+        cy="278"
+        r="11"/>
+
+    </svg>
+
+  </div>
+
+
+  <!-- MIC ACTION -->
+
+  <button
+    id="mainMicButton"
+    class="main-mic-button"
+    type="button">
+
+    <span class="mic-button-light"></span>
+
+    <span id="mainMicText">
+      TAP TO ACTIVATE
+    </span>
+
+  </button>
+
+
+  <div class="signature">
+    DX SHUVO <b>VOICE KING</b>
+  </div>
+
+</main>
+
+  </div>  <script src="popup.js"></script></body>
+</html>
